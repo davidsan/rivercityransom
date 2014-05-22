@@ -1,0 +1,100 @@
+Nom du test : testInitOK
+Operation(s) du test : 
+gangster.init("foo", 10, 50, 20, 50, 1001, 1, 0, 0);
+Oracle du test : 
+gangster.nom() = foo
+gangster.largeur() = 10
+gangster.hauteur() = 50
+gangster.profondeur() = 20
+gangster.force() = 50
+gangster.pointsDeVie() = 1001
+gangster.getX() = 1
+gangster.getY() = 0
+gangster.getZ() = 0
+
+Nom du test : testInitFailEmptyName
+Operation(s) du test : 
+gangster.init("", 10, 50, 20, 50, 1001, 1, 0, 0);
+Oracle du test : 
+gangster = null
+
+Nom du test : testInitFailLargeur
+Operation(s) du test : 
+gangster.init("foo", -1, 50, 20, 50, 1001, 1, 0, 0);
+Oracle du test : 
+gangster = null
+
+Nom du test : testInitFailHauteur
+Operation(s) du test : 
+gangster.init("foo", 50, -5, 20, 50, 1001, 1, 0, 0);
+Oracle du test : 
+gangster = null
+
+Nom du test : testInitFailProfondeur
+Operation(s) du test : 
+gangster.init("foo", 50, 5, -20, 50, 1001, 1, 0, 0);
+Oracle du test : 
+gangster = null
+
+Nom du test : testInitFailNegativeForce
+Operation(s) du test : 
+gangster.init("foo", 50, 5, 20, -50, 1001, 1, 0, 0);
+Oracle du test : 
+gangster = null
+
+Nom du test : testInitFailZeroForce
+Operation(s) du test : 
+gangster.init("foo", 50, 5, 20, 0, 1001, 1, 0, 0);
+Oracle du test : 
+gangster = null
+
+Nom du test : testInitFailForceGreaterThanLifePoint
+Operation(s) du test : 
+gangster.init("foo", 50, 5, 20, 9000, 1001, 1, 0, 0);
+Oracle du test : 
+gangster = null
+
+Nom du test : testDepotOk
+Operation(s) du test : 
+gangster.init("foo", 10, 50, 20, 50, 1001, 1, 0, 0);
+gangster.depot(5)
+Oracle du test : 
+gangster.pointsDeVie() = 10015
+
+Nom du test : testDepotFail1
+Operation(s) du test : 
+gangster.init("foo", 10, 50, 20, 50, 1001, 1, 0, 0);
+gangster.depot(-5)
+Oracle du test : 
+fail
+
+Nom du test : testDepotFail2
+Operation(s) du test : 
+gangster.init("foo", 10, 50, 20, 50, 1001, 1, 0, 0);
+gangster.retrait(1005)
+gangster.depot(5)
+Oracle du test : 
+fail
+
+Nom du test : testRetraitOk
+Operation(s) du test : 
+gangster.init("foo", 10, 50, 20, 50, 1001, 1, 0, 0);
+gangster.retrait(5)
+Oracle du test : 
+gangster.pointsDeVie() = 996
+
+Nom du test : testRetraitFail1
+Operation(s) du test : 
+gangster.init("foo", 10, 50, 20, 50, 1001, 1, 0, 0);
+gangster.retrait(-5)
+Oracle du test : 
+fail
+
+Nom du test : testRetraitFail2
+Operation(s) du test : 
+gangster.init("foo", 10, 50, 20, 50, 1001, 1, 0, 0);
+gangster.retrait(5)
+gangster.retrait(1002)
+Oracle du test : 
+fail
+

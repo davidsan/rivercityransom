@@ -1,0 +1,27 @@
+Service : Bloc
+
+Use : Objet
+
+Types : TYPE
+
+enum TYPE {
+	VIDE, 
+	FOSSE
+} 
+
+Observators :
+	getType : [Bloc] -> TYPE
+	getObjet : [Bloc] -> [Objet]
+	
+Constructors :
+	init : TYPE * [Objet] -> [Bloc] 
+
+Operators :
+	setObjet : [Bloc] -> [Objet] -> [Bloc]
+
+Observations :
+	[init]
+		getType(init(type, obj)) = type
+		getObjet(init(type, obj)) = obj
+	[setObjet]
+		getObjet(setObjet(B, t)) = t

@@ -1,0 +1,90 @@
+Service : Gangster
+
+Use : Objet, Bloc
+
+Types : String, int, boolean, TRESOR
+
+Observators :
+	const nom : [Gangster] -> String 
+	const largeur : [Gangster] -> int 
+	const hauteur : [Gangster] -> int 
+	const profondeur: [Gangster] -> int
+	const force : [Gangster] -> int 
+	pointsDeVie : [Gangster] -> int 
+	estVaincu : [Gangster] -> boolean
+	estEquipe : [Gangster] -> boolean
+	laChoseEquipee : [Gangster] -> [Objet]
+	getX : [Gangster] -> int
+	getY : [Gangster] -> int
+	getZ : [Gangster] -> int
+
+Constructors :
+	init : String * int * int * int * int * int * int * int * int * [Objet]
+			-> [Gangster]
+		pre init(nom,largeur,hauteur,profondeur,force,vie,x,y,z,o)
+			require 
+				nom <> "" 
+				&& largeur > 0 
+				&& hauteur > 0 
+				&& profondeur > 0  
+				&& 0 < force < vie
+				&& Objet::isEquipable(o)
+Operators :
+	retrait : [Gangster] * int -> [Gangster]
+		pre retrait(G,s) 
+			require 
+				!estVaincu(G) 
+				&& s > 0
+
+	depot : [Gangster] * int -> [Perssonnage]
+		pre depot(G,s) 
+			require 
+				!estVaincu(P) 
+				&& s > 0
+
+	jeter : [Gangster] * Bloc -> [Gangster]
+		pre jeter(G,b) 
+			require 
+				estEquipe(G)
+
+	setX : [Personnage] * int -> [Personnage]
+
+	setY : [Personnage] * int -> [Personnage]
+
+	setZ : [Personnage] * int -> [Personnage]
+
+Observations : 
+	[invariants]
+		estVaincu(G) = pointsDeVie(G) <= 0 
+		estEquipe(G) = Objet::isEquipable(laChoseEquipee(G))
+
+	[init]
+		nom(init(n,l,h,p,f,pv,x,y,z,o)) = n 
+		largeur(init(n,l,h,p,f,pv,x,y,z,o)) = l 
+		hauteur(init(n,l,h,p,f,pv,x,y,z,o)) = h
+		profondeur(init(n,l,h,p,f,pv,x,y,z,o)) = p 
+		force(init(n,l,h,p,f,pv,x,y,z,o)) = f 
+		pointsDeVie(init(n,l,h,p,f,pv,x,y,z,o)) = pv
+		laChoseEquipee(init(n,l,h,p,f,pv,x,y,z,o)) = o
+		getX(init(n,l,h,p,f,pv,x,y,z,o)) = x
+		getY(init(n,l,h,p,f,pv,x,y,z,o)) = y
+		getZ(init(n,l,h,p,f,pv,x,y,z,o)) = z
+
+	[depot] 
+		pointsDeVie(depot(G,s)) = pointsDeVie(G) + s
+
+	[retrait] 
+		pointsDeVie(retrait(G,s)) = pointsDeVie(G) - s
+
+	[jeter]
+		laChoseEquipee(jeter(G,b)) = null
+		Bloc::getObjet(jeter(G,b)) = laChoseEquipee(G)
+
+	[setX]
+		getX(setX(G,x)) = x
+
+	[setY]
+		getY(setY(G,y)) = y
+
+	[setZ]
+		getZ(setZ(G,z)) = z

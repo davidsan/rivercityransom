@@ -1,0 +1,157 @@
+Nom du test : testInitOK
+Operation(s) du test : 
+personnage.init("foo", 10, 50, 20, 50, 1001, 1, 0, 0);
+Oracle du test : 
+personnage.nom() = foo
+personnage.largeur() = 10
+personnage.hauteur() = 50
+personnage.profondeur() = 20
+personnage.force() = 50
+personnage.pointsDeVie() = 1001
+personnage.getX() = 1
+personnage.getY() = 0
+personnage.getZ() = 0
+
+Nom du test : testInitFailEmptyName
+Operation(s) du test : 
+personnage.init("", 10, 50, 20, 50, 1001, 1, 0, 0);
+Oracle du test : 
+personnage = null
+
+Nom du test : testInitFailLargeur
+Operation(s) du test : 
+personnage.init("foo", -1, 50, 20, 50, 1001, 1, 0, 0);
+Oracle du test : 
+personnage = null
+
+Nom du test : testInitFailHauteur
+Operation(s) du test : 
+personnage.init("foo", 50, -5, 20, 50, 1001, 1, 0, 0);
+Oracle du test : 
+personnage = null
+
+Nom du test : testInitFailProfondeur
+Operation(s) du test : 
+personnage.init("foo", 50, 5, -20, 50, 1001, 1, 0, 0);
+Oracle du test : 
+personnage = null
+
+Nom du test : testInitFailNegativeForce
+Operation(s) du test : 
+personnage.init("foo", 50, 5, 20, -50, 1001, 1, 0, 0);
+Oracle du test : 
+personnage = null
+
+Nom du test : testInitFailZeroForce
+Operation(s) du test : 
+personnage.init("foo", 50, 5, 20, 0, 1001, 1, 0, 0);
+Oracle du test : 
+personnage = null
+
+Nom du test : testInitFailForceGreaterThanLifePoint
+Operation(s) du test : 
+personnage.init("foo", 50, 5, 20, 9000, 1001, 1, 0, 0);
+Oracle du test : 
+personnage = null
+
+Nom du test : testDepotOk
+Condition(s) initiale(s) du test : 
+personnage.init("foo", 10, 50, 20, 50, 1001, 1, 0, 0);
+Operation(s) du test : 
+personnage.depot(5)
+Oracle du test : 
+personnage.pointsDeVie() = 1006
+
+Nom du test : testDepotFail1
+Condition(s) initiale(s) du test : 
+personnage.init("foo", 10, 50, 20, 50, 1001, 1, 0, 0);
+Operation(s) du test : 
+personnage.depot(-5)
+Oracle du test : 
+fail
+
+Nom du test : testDepotFail2
+Condition(s) initiale(s) du test : 
+personnage.init("foo", 10, 50, 20, 50, 1001, 1, 0, 0);
+Operation(s) du test : 
+personnage.retrait(1005)
+personnage.depot(5)
+Oracle du test : 
+fail
+
+Nom du test : testRetraitOk
+Condition(s) initiale(s) du test : 
+personnage.init("foo", 10, 50, 20, 50, 1001, 1, 0, 0);
+Operation(s) du test : 
+personnage.retrait(5)
+Oracle du test : 
+personnage.pointsDeVie() = 996
+
+Nom du test : testRetraitFail1
+Condition(s) initiale(s) du test : 
+personnage.init("foo", 10, 50, 20, 50, 1001, 1, 0, 0);
+Operation(s) du test : 
+personnage.retrait(-5)
+Oracle du test : 
+fail
+
+Nom du test : testRetraitFail2
+Condition(s) initiale(s) du test : 
+personnage.init("foo", 10, 50, 20, 50, 1001, 1, 0, 0);
+Operation(s) du test : 
+personnage.retrait(5)
+personnage.retrait(1002)
+Oracle du test : 
+fail
+
+Nom du test : testDepotArgentOk
+Condition(s) initiale(s) du test : 
+personnage.init("foo", 10, 50, 20, 50, 1001, 1, 0, 0);
+Operation(s) du test : 
+personnage.depotArgent(5)
+Oracle du test : 
+personnage.sommeArgent() = 5
+
+Nom du test : testDepotArgentFail1
+Condition(s) initiale(s) du test : 
+personnage.init("foo", 10, 50, 20, 50, 1001, 1, 0, 0);
+personnage.depotArgent(-5)
+Oracle du test : 
+fail
+
+Nom du test : testDepotArgentFail2
+Condition(s) initiale(s) du test : 
+personnage.init("foo", 10, 50, 20, 50, 1001, 1, 0, 0);
+Operation(s) du test : 
+personnage.depotArgent(5)
+personnage.retrait(1004)
+Oracle du test : 
+fail
+
+Nom du test : testRetraitArgentOk
+Condition(s) initiale(s) du test : 
+personnage.init("foo", 10, 50, 20, 50, 1001, 1, 0, 0);
+personnage.depotArgent(100)
+Operation(s) du test : 
+personnage.retraitArgent(100)
+Oracle du test : 
+personnage.sommeArgent() = 0
+
+Nom du test : testRetraitArgentFail1
+Condition(s) initiale(s) du test : 
+personnage.init("foo", 10, 50, 20, 50, 1001, 1, 0, 0);
+Operation(s) du test : 
+personnage.retraitArgent(-5)
+Oracle du test : 
+fail
+
+Nom du test : testRetraitArgentFail2
+Condition(s) initiale(s) du test : 
+personnage.init("foo", 10, 50, 20, 50, 1001, 1, 0, 0);
+personnage.depotArgent(100)
+personnage.retrait(1004)
+Operation(s) du test : 
+personnage.retraitArgent(5)
+Oracle du test : 
+fail
+

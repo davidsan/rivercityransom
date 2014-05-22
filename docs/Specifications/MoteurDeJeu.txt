@@ -1,0 +1,67 @@
+Service : MoteurDeJeu
+
+Use : GestionCombat
+
+Types : int, boolean, COMMANDE, RESULTAT
+
+enum COMMANDE { 
+	HAUT, 
+	BAS, 
+	DROITE, 
+	GAUCHE, 
+	JET, 
+	RAMASSE, 
+	FRAPPE, 
+	RIEN 
+}
+
+enum RESULTAT { 
+	GAGNEE, 
+	PERDUE, 
+	NULLE
+}
+
+Observators :
+	resulatFinal : [MoteurDeJeu] -> RESULTAT
+	estFini : [MoteurDeJeu] -> boolean 
+	combat : [MoteurDeJeu] -> [GestionCombat]
+	pasJeuCourant : [MoteurDeJeu] -> int
+
+Constructors :
+	init : int * int * int -> [MoteurDeJeu]
+		pre init(largeur, hauteur, profondeur)
+			require 
+				largeur > 200 
+				&& profondeur > 200 
+				&& hauteur > 100
+
+Operators :
+	pasDeJeu : [MoteurDeJeu] * COMMANDE * COMMANDE -> [MoteurDeJeu]
+		pre pasDeJeu(M, cR, cA) 
+			require 
+				!estFini(M)
+
+Observations :
+	[invariant]
+		estFini(M) = 
+				Personnage::estVaincu(GestionCombat::slick(combat(M)) 
+				|| (Personnage::estVaincu(GestionCombat::ryan(combat(M))
+					&& Personnage::estVaincu(GestionCombat::alex(combat(M))))
+
+		resultatFinal(M) = RESULTAT.GAGNEE, si
+				Personnage::estVaincu(GestionCombat::slick(combat(M)) 
+				&& (!Personnage::estVaincu(GestionCombat::ryan(combat(M))) 
+					|| !Personnage::estVaincu(GestionCombat::slick(combat(M))))
+
+		resultatFinal(M) = RESULTAT.PERDUE, si				
+				Personnage::estVaincu(GestionCombat::ryan(combat(M)) 
+				&& Personnage::estVaincu(GestionCombat::alex(combat(M))
+
+		resultatFinal(M) = RESULTAT.NULLE, sinon
+
+	[init]
+		combat(init(x, y, z)) = GestionCombat::init(x, y, z)
+	
+	[pasDeJeu]
+		pasJeuCourant(pasDeJeu(M, cr, ca)) = pasJeuCourant(M) + 1;
+		combat(pasJeu(M, cr, ca)) = GestionCombat::gerer(combat(M), cr, ca)

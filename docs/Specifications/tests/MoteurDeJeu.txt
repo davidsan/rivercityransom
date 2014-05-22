@@ -1,0 +1,15 @@
+Nom du test : testInitOK
+Operation(s) du test : 
+moteur.init(30,10,10);
+Oracle du test : 
+moteur.combat().getTerrain().nbBlocLargeur() = 30
+moteur.combat().getTerrain().nbBlocHauteur() = 10
+moteur.combat().getTerrain().nbBlocProfondeur() = 10
+
+Nom du test : testPasDeJeuOk
+Operation(s) du test : 
+moteur.init(30,10,10);
+moteur.pasDeJeu(BAS, BAS);
+Oracle du test : 
+moteur.pasJeuCourant() = moteurPasJeuCourant_atPre + 1
+

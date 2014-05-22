@@ -1,0 +1,83 @@
+Nom du test : testInitOK
+Operation(s) du test : 
+terrain.init(10, 50, 20);
+Oracle du test : 
+terrain.nbBlocLargeur() = 10
+terrain.nbBlocHauteur() = 50
+terrain.nbBlocProfondeur() = 20
+
+Nom du test : testInitFailX
+Operation(s) du test : 
+terrain.init(-1, 50, 20);
+Oracle du test : 
+fail
+
+Nom du test : testInitFailY
+Operation(s) du test : 
+terrain.init(10, -1, 20);
+Oracle du test : 
+fail
+
+Nom du test : testInitFailZ
+Operation(s) du test : 
+terrain.init(10, 50, -1);
+Oracle du test : 
+fail
+
+Nom du test : testSetBlocOK
+Condition(s) initiale(s) du test : 
+terrain.init(10, 50, 20);
+bloc.init(VIDE, tresor);
+objet.init(CHAINEDEVELO);
+Operation(s) du test : 
+Oracle du test : 
+terrain.getBloc(5, 25, 10).getType() = VIDE
+terrain.getBloc(5, 25, 10).getObjet().getTresor() = CHAINEDEVELO
+
+Nom du test : testSetBlocFailNegX
+Condition(s) initiale(s) du test : 
+terrain.init(10, 50, 20);
+bloc.init(VIDE, tresor);
+objet.init(CHAINEDEVELO);
+Operation(s) du test : 
+Oracle du test : 
+fail
+
+Nom du test : testSetBlocFailNegY
+Condition(s) initiale(s) du test : 
+terrain.init(10, 50, 20);
+bloc.init(VIDE, tresor);
+objet.init(CHAINEDEVELO);
+Operation(s) du test : 
+Oracle du test : 
+fail
+
+Nom du test : testSetBlocFailNegZ
+Condition(s) initiale(s) du test : 
+terrain.init(10, 50, 20);
+bloc.init(VIDE, tresor);
+objet.init(CHAINEDEVELO);
+Operation(s) du test : 
+Oracle du test : 
+fail
+
+Nom du test : testSetBlocOKLowerBounds
+Condition(s) initiale(s) du test : 
+terrain.init(10, 50, 20);
+bloc.init(VIDE, tresor);
+objet.init(CHAINEDEVELO);
+Operation(s) du test : 
+Oracle du test : 
+terrain.getBloc(0, 0, 0).getType() = VIDE
+terrain.getBloc(0, 0, 0).getObjet().getTresor() = CHAINEDEVELO
+
+Nom du test : testSetBlocOKUpperBounds
+Condition(s) initiale(s) du test : 
+terrain.init(10, 50, 20);
+bloc.init(VIDE, tresor);
+objet.init(CHAINEDEVELO);
+Operation(s) du test : 
+Oracle du test : 
+terrain.getBloc(9, 49, 19).getType() = VIDE
+terrain.getBloc(9, 49, 19).getObjet().getTresor() = CHAINEDEVELO
+

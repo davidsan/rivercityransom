@@ -1,0 +1,16 @@
+Nom du test : testInitOK
+Condition(s) initiale(s) du test : 
+objet.init(CINQUANTECENTIMES);
+Operation(s) du test : 
+bloc.init(VIDE, objet);
+Oracle du test : 
+
+Nom du test : testSetTresorOK
+Condition(s) initiale(s) du test : 
+objet.init(CINQUANTECENTIMES);
+myObjet.init(POUBELLEMETALLIQUE);
+bloc.init("VIDE", objet);
+Operation(s) du test : 
+bloc.setTresor(objet)
+Oracle du test : 
+

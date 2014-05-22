@@ -1,0 +1,32 @@
+Service : Objet
+
+Use : N/A
+
+Types : boolean, TRESOR
+
+enum TRESOR { 
+	UNDOLLAR, 
+	CINQUANTECENTIMES, 
+	CHAINEDEVELO, 
+	POUBELLEMETALLIQUE 
+}
+
+Observators :
+	isEquipable : [Objet] -> boolean
+	isValeurMarchande : [Objet] -> boolean
+	getTresor : [Objet] -> TRESOR
+	
+Constructors : 
+	init : TRESOR -> [Objet]
+
+Observations :
+	[invariants]
+		isEquipable(O) = 
+			getTresor(O) == CHAINEDEVELO
+			|| getTresor(O) == POUBELLEMETALLIQUE
+		isValeurMarchande(O) = 
+			getTresor(O) == UNDOLLAR
+			|| getTresor(O) == CINQUANTECENTIMES
+
+	[init]
+		getTresor(init(tresor)) = tresor

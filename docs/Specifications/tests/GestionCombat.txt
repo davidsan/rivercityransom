@@ -1,0 +1,15 @@
+Nom du test : testInitOK
+Operation(s) du test : 
+gestionCombat.init(50, 50, 20);
+Oracle du test : 
+gestionCombat.getTerrain().nbBlocLargeur() == 50
+gestionCombat.getTerrain().nbBlocPronfondeur() == 20
+gestionCombat.getTerrain().nbBlocHauteur() == 50
+gestionCombat.estFrappe("Alex") == false
+gestionCombat.estFrappe("Ryan") == false
+gestionCombat.estFrappe("Slick") == false
+gestionCombat.estGele("Alex") == false
+gestionCombat.estGele("Ryan") == false
+gestionCombat.estGele("Slick") == false
+for (GangsterService g : gangster()) {if (!(gestionCombat.estFrappe(g.nom()) == false)) {throw new PostconditionError("init");}if (!(gestionCombat.estGele(g.nom()) == false)) {throw new PostconditionError("init");}}
+

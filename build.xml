@@ -1,0 +1,103 @@
+<project name="rivercityransom" default="compile" basedir=".">
+    <description>
+       Fichier de construction pour River City Ransom
+    </description>
+  <!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="build" location="build"/>
+  <property name="jars" location="jars"/>
+  <property name="report" value="reports"/>
+  <!-- METTRE ICI LE NOM DU BINOME -->
+  <property name="nom1" value="FERREIRA"/>
+  <property name="nom2" value="SAN"/>
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="compile" depends="init"
+        description="compile the source " >
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac debug="true" classpath="${jars}/junit.jar:${jars}/gson-2.2.4.jar" srcdir="${src}" excludes="" destdir="${build}" />
+  </target>
+
+  <target name="run" depends="compile"
+          description="run application in release mode">
+    <echo>================ Run Object Main ================</echo>
+    <java classname="rivercityransom.main.Main"
+          classpath="${build}">
+    </java>
+  </target>
+
+  <target name="test" depends="compile"
+          description="test w/out contract">
+    <echo>================ Run test w/out contract ================</echo>
+    <mkdir dir="${report}"/>
+    <junit printsummary="yes">
+      <classpath>
+        <pathelement location="${build}"/>
+        <pathelement location="${jars}/junit.jar"/>
+        <pathelement location="${jars}/gson-2.2.4.jar"/>
+      </classpath>
+
+      <formatter type="plain"/>
+
+      <test name="rivercityransom.test.BlocTest" outfile="${report}/BlocTest"/>
+      <test name="rivercityransom.test.GangsterTest" outfile="${report}/GangsterTest"/>
+      <test name="rivercityransom.test.GestionCombatTest" outfile="${report}/GestionCombatTest"/>
+      <test name="rivercityransom.test.MoteurJeuTest" outfile="${report}/MoteurJeuTest"/>
+      <test name="rivercityransom.test.ObjetTest" outfile="${report}/ObjetTest"/>
+      <test name="rivercityransom.test.PersonnageTest" outfile="${report}/PersonnageTest"/>
+      <test name="rivercityransom.test.TerrainTest" outfile="${report}/TerrainTest"/>
+
+    </junit>
+  </target>
+
+  <target name="ctest" depends="compile"
+          description="test w/ contract">
+    <echo>================ Run test w/ contract ================</echo>
+    <mkdir dir="${report}"/>
+    <junit printsummary="yes">
+      <classpath>
+        <pathelement location="${build}"/>
+        <pathelement location="${jars}/junit.jar"/>
+        <pathelement location="${jars}/gson-2.2.4.jar"/>
+      </classpath>
+
+      <formatter type="plain"/>
+
+
+      <test name="rivercityransom.test.BlocTestContract" outfile="${report}/BlocTestContract"/>
+      <test name="rivercityransom.test.GangsterTestContract" outfile="${report}/GangsterTestContract"/>
+      <test name="rivercityransom.test.GestionCombatTestContract" outfile="${report}/GestionCombatTestContract"/>
+      <test name="rivercityransom.test.MoteurJeuTestContract" outfile="${report}/MoteurJeuTestContract"/>
+      <test name="rivercityransom.test.ObjetTestContract" outfile="${report}/ObjetTestContract"/>
+      <test name="rivercityransom.test.PersonnageTestContract" outfile="${report}/PersonnageTestContract"/>
+      <test name="rivercityransom.test.TerrainTestContract" outfile="${report}/TerrainTestContract"/>
+
+    </junit>
+  </target>
+
+  <target name="dist" depends="init,clean"
+        description="Generer la distribution" >
+    <!-- tout mettre dans l'archive -->
+    <jar basedir=".." jarfile="../RiverCityRansom-${nom1}-${nom2}-${DSTAMP}.jar"
+    includes="RiverCityRansom/**/*" excludes="**/CVS"/>
+  </target>
+
+  <target name="clean"
+        description="clean up" >
+    <echo>================ Removing temporary files... ================</echo>
+    <delete verbose="true"> <!-- Remove all *~ files -->
+       <fileset dir="${basedir}" defaultexcludes="no">
+         <include name="**/*~"/>
+       </fileset>
+    </delete>
+    <echo>================ Removing build directory ================</echo>
+    <delete dir="${build}"/>
+    <delete dir="${report}"/>
+  </target>
+</project>

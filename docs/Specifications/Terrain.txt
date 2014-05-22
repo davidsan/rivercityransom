@@ -1,0 +1,44 @@
+service : Terrain
+
+use : Bloc
+
+types : int, boolean
+
+Observators :
+	const nbBlocLargeur : [Terrain] -> int
+	const nbBlocHauteur : [Terrain] -> int
+	const nbBlocProfondeur : [Terrain] -> int
+	getBloc : [Terrain] * int * int * int -> [Bloc]
+		pre getBloc(T, x, y, z) 
+			require (0 <= x <= nbBlocLargeur(T)) 
+					&& (0 <= y <= nbBlocHauteur(T))
+					&& (0 <= z <= nbBlocProfondeur(T))
+
+Constructors :
+	init : int * int * int -> [Terrain]
+		pre init(largeur, hauteur, profondeur)
+			require	
+				largeur > 0 
+				&& hauteur > 0 
+				&& profondeur > 0  
+
+Operators :
+	setBloc : [Terrain] * int * int * int * [Bloc] -> [Terrain] 
+		pre changeBloc(T, x, y, z)
+			require 
+				0 <= x < nbBlocLargeur(T) 
+				&& 0 <= y < nbBlocHauteur(T) 
+				&& 0 <= z < nbBlocProfondeur(T)
+
+Observations : 
+	[init]
+		nbBlocLargeur(init(l, h, p)) = l 
+		nbBlocHauteur(init(l, h, p)) = h 
+		nbBlocProfondeur(init(l, h, p)) = p
+		getBloc(x, y, z) <> null
+		Bloc::getType(getBloc(init(l, h, p), x, y, z)) = Bloc::TYPE.VIDE 
+		Bloc::getObjet(getBloc(init(l, h, p), x, y, z)) = null
+
+	[setBloc]
+		Bloc::getType(setBloc(init(l, h, p), x, y, z, b)) = Bloc::getType(b)
+		Bloc::getObjet(setBloc(init(l, h, p), x, y, z, b)) = Bloc::getObjet(b)

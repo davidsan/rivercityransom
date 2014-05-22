@@ -1,0 +1,24 @@
+Nom du test : testInitOK1
+Operation(s) du test : 
+objet.init(CHAINEDEVELO);
+Oracle du test : 
+objet.getTresor() = CHAINEDEVELO
+
+Nom du test : testInitOK2
+Operation(s) du test : 
+objet.init(CINQUANTECENTIMES);
+Oracle du test : 
+objet.getTresor() = CINQUANTECENTIMES
+
+Nom du test : testInitOK3
+Operation(s) du test : 
+objet.init(POUBELLEMETALLIQUE);
+Oracle du test : 
+objet.getTresor() = POUBELLEMETALLIQUE
+
+Nom du test : testInitOK4
+Operation(s) du test : 
+objet.init(UNDOLLAR);
+Oracle du test : 
+objet.getTresor() = UNDOLLAR
+
